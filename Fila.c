@@ -58,24 +58,29 @@ void ImprimirProdutoFila(TProduto Item) {
     printf("\n Quantidade do produto:%d", Item.quantidade);
     printf("\n Preco do produto:%2.f", Item.preco);
 }
-/*int PesquisarFila(TFila *Fila, TProduto *Item) {
+int PesquisarFila(TFila *Fila, TProduto *Item) {
+    TFila FAux;
+    FFVazia(&FAux);
     TProduto x;
-    TFila Faux; FFVazia(&Faux);
-    int n = Fila->tamanho;
-    bool seencontrar = false;
-    for(int i = 0; i < n; i++){
+    int flag = 0;
+    while(!Vazia(*Fila)){
         Desenfileirar(Fila, &x);
-        if(strcmp(x.nome, Item->nome) == 0) {
-            ImprimirProdutoFila(&Faux,&x);
-            *Item = x;
-            Enfileirar(x,Faux);
-            seencontrar = true; // return true;
-        }    for(int i = 0; i > n; i++){
-                Desenfileirar(&Faux, &x);
-                Enfileirar(x,Fila);
+        if(!strcmp(x.nome, Item->nome)){
+        flag = 1;
+        *Item = x;
         }
+        Enfileirar(x,&FAux);
     }
-}*/
+    while(!Vazia(FAux)){
+        Desenfileirar(&FAux, &x);
+        Enfileirar(x,Fila);
+    }
+        if(flag == 0){
+        Item->codigo = -1;
+    }
+        return flag;
+}
+
 void ImprimirFila(TFila *Fila) {
     TProduto x;
     TFila Faux; FFVazia(&Faux);
@@ -90,3 +95,33 @@ void ImprimirFila(TFila *Fila) {
         }  free(Faux.frente);
     }
 }
+void LiberarFila(TFila *Fila)  {
+        TProduto x;
+        while(!Vazia(*Fila)){
+            Desenfileirar(Fila, &Fila->frente->prox->item);
+        }
+        free(Fila->frente);
+        Fila->frente = NULL;
+}
+int CompararFila(TFila x, TFila y) {
+    int flag = 1;
+    TFila *Aux1, *Aux2;
+    Aux1 = x.frente->prox;
+    Aux2 = y.frente->prox;
+    if((x.tamanho - y.tamanho)!= 0){ //aqui compara se o tamanho das duas filas são iguais, se for retorna 0
+    return 0;
+    }
+    while(Aux1 != NULL) {
+        if(strcmp(Aux1->item.nome, Aux2->item.nome) == 0) {
+            Aux1 = Aux1->prox;
+            Aux2 = Aux2->prox;
+
+        } else {
+            Aux1 = Aux1->prox;
+            Aux2 = Aux2->prox;
+            flag = 0;
+        }
+    }
+    return flag;
+}
+

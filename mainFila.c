@@ -13,7 +13,7 @@ int main() {
        while(escolha != 4 ){
             printf("\n|| MENU ||\n");
             printf("|1| Enfileirar produtos:\n");
-            printf("|2| Pesquisar um produto.\n");
+            printf("|2| Pesquisar um produto:\n");
             printf("|3| Imprimir produtos.\n");
             printf("|4| Sair.\n");
             printf("Escolha uma das acoes:");
@@ -26,19 +26,19 @@ int main() {
                     break;
 
                 case 2:
-                   /* printf("\nDigite o codigo para pesquisar um produto especifico:");
+                    printf("\nDigite o codigo para pesquisar um produto especifico:");
                     scanf("%d", &y.codigo);
-                    PesquisarFila(F1, y);
+                    TCelula* p = PesquisarFila(F1, y);
 
-                    if (x != NULL) {
-                        printf("\nProduto %d encontrado!", x->prox->item.codigo);
-                        printf("\nNome: %s", x->prox->item.nome);
-                        printf("\nDescricao: %s", x->prox->item.descricao);
-                        printf("\nQuantidade: %d", x->prox->item.quantidade);
-                        printf("\nValor: $%.2f", x->prox->item.preco);
-                    } else {
+                    if (p != NULL) {
+                        printf("\nProduto %d encontrado!", p->prox->item.codigo);
+                        printf("\nNome: %s", p->prox->item.nome);
+                        printf("\nDescricao: %s", p->prox->item.descricao);
+                        printf("\nQuantidade: %d", p->prox->item.quantidade);
+                        printf("\nValor: $%.2f", p->prox->item.preco);
+                    }
                         printf("Produto %d nao encontrado.", y.codigo);
-                    }*/
+                    }
                     break;
 
                 case 3:
@@ -57,5 +57,5 @@ int main() {
     }
 
     return 0;
-}
+
 

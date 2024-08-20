@@ -29,6 +29,7 @@ int PesquisarFila(TFila *Fila, TProduto *Item);
 void LerProdutoFila(TProduto *Item);
 void ImprimirProdutoFila(TProduto Item);
 void ImprimirFila(TFila *Fila);
-
+void LiberarFila(TFila *Fila);
+int CompararFila(TFila x, TFila y);
 
 #endif //TESTE_FILA_H
