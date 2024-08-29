@@ -8,6 +8,7 @@ typedef struct item {
     char descricao[100];
     float preco;
     int quantidade;
+    char binario[32]
 }TProduto;
 
 typedef struct celula {
@@ -30,6 +31,9 @@ void LerProdutoFila(TProduto *Item);
 void ImprimirProdutoFila(TProduto Item);
 void ImprimirFila(TFila *Fila);
 void LiberarFila(TFila *Fila);
-int CompararFila(TFila x, TFila y);
+int CompararFila(TFila F1, TFila F2);
+void IntersecaoFila(TFila F1, TFila F2, TFila F3);
+void GerarBinarios(TFila *Fila, TProduto *Item);
+
 
 #endif //TESTE_FILA_H
