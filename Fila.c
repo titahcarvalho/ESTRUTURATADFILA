@@ -108,9 +108,9 @@ void LiberarFila(TFila *Fila)  {
         Fila->frente = NULL;
 }
 //QUESTÃO 2 ---------------------------------------------------------------------------------------------------------
-/*int CompararFila(TFila *F1, TFila *F2) {
+int CompararFila(TFila *F1, TFila *F2) {
     int flag = 1;
-    TFila *Aux1, *Aux2;
+    TCelula *Aux1, *Aux2;
     TProduto tempAux1, tempAux2; //criação das variaveis temporárias
     Aux1 = F1->frente->prox;
     Aux2 = F2->frente->prox;
@@ -119,8 +119,8 @@ void LiberarFila(TFila *Fila)  {
     return 0;
     }
     while(Aux1 != NULL && Aux2 != NULL) {
-        Desenfileirar(&F1, &tempAux1);//analisar essa aprte, DEVE Ser armazenado em variáveis temporarias
-        Desenfileirar(&F2, &tempAux2);//analisar essa aprte
+        Desenfileirar(F1, &tempAux1);
+        Desenfileirar(F2, &tempAux2);
         while(strcmp(tempAux1.nome, tempAux2.nome)== 0){
             if(tempAux1.nome == tempAux1.nome) {
                 printf("A duas filas possuem os mesmo elementos.");
@@ -136,32 +136,11 @@ void LiberarFila(TFila *Fila)  {
     return flag;
 }
 
-//ANTES
-/* int CompararFila(TFila F1, TFila F2) {
-int flag = 1;
-TFila *Aux1, *Aux2;
-TFila tempAux1, tempAux2;
-Aux1 = F1.frente->prox;
-Aux2 = F2.frente->prox;
-if((F1.tamanho - F2.tamanho)!= 0){ //aqui compara se o tamanho das duas filas são iguais, se for retorna 0
-return 0;
-}
-while(Aux1 != NULL) {
-Desenfileirar(Aux2, &tempAux1);//analisar essa aprte, DEVE Ser armazenado em variáveis temporarias
-Desenfileirar(Aux1, &tempAux2);//analisar essa aprte
-while(strcmp(tempAux1->item.nome, tempAux2->item.nome)== 0){
-flag = 0;
-}
-free(F1->frente);
-F1->frente = NULL;
-}
-return flag;
-}*/
 
 //QUESTÃO 3 ---------------------------------------------------------------------------------------------------------
-/*void IntersecaoFila(TFila F1, TFila F2, TFila F3) {
+void IntersecaoFila(TFila F1, TFila F2, TFila F3) {
     TFila tempFila2;
-    TProduto Aux1, Aux2; //é isso mesmo?j
+    TProduto Aux1, Aux2;
     FFVazia(&F3);
 
     while(!Vazia(F1)) {
@@ -178,7 +157,12 @@ return flag;
         }
     }
 
-}*/
+}
+//QUESTÃO 4 ---------------------------------------------------------------------------------------------------------
+void DiferencaFila(TFila F1, TFila F2, TFila F3) {
+
+
+}
 //QUESTÃO 5 ---------------------------------------------------------------------------------------------------------
 void EnfileirarPrioridade(FilaPrioridade *fila, TItem x) {
     TProduto produto;
@@ -244,27 +228,38 @@ void FilaUnica(FilaPrioridade Fila, TFila *Unica) {
 }
 //QUESTÃO 6 ---------------------------------------------------------------------------------------------------------
 void GerarBinarios(TFila *Fila, int n) {
-    char binario[50];
-    char binario2[50];
+    // Inicializa a fila auxiliar
+    TFila fila2;
+    FFVazia(&fila2);  // Inicializa a fila vazia
 
-    if (Vazia(*Fila)) {
-        Enfileirar(1, Fila);
+    // Inicializa o primeiro item como "1" e o enfileira
+    char item[20];
+    strcpy(item, "1");
+    Enfileirar(Fila, item);
+
+    // Loop para gerar binários até n
+    for (int i = 0; i < n; i++) {
+        // Desenfileira o item atual da fila
+        Desenfileirar(Fila, item);
+
+        // Imprime o valor do item atual
+        ImprimirFila(item);
+
+        // Alterna entre adicionar "0" e "1" ao item, baseado no valor de i
+        if (i % 2 == 0) {
+            strcat(item, "0");
+        } else {
+            strcat(item, "1");
+        }
+
+        // Enfileira o novo valor na fila auxiliar
+        Enfileirar(&fila2, item);
     }
 
-    for(int i = 0; i < n ;i++) {
-        Desenfileirar(Fila, binario);
-
-        strcpy(binario2, binario); //binario2 = binario;
-        strcat(binario,"0");
-        printf("%s\n", binario);
-
-        strcpy(binario, binario2); //binario = binario2;
-        strcat(binario, "1");
-        printf("%s\n", binario);
-
-        Enfileirar(binario2, Fila);
-    }
+    // Caso queira, pode transferir de volta para a fila original ou continuar com fila2
 }
+
+
 
 
 

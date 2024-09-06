@@ -11,13 +11,14 @@ int main() {
     TFila F1;
     FFVazia(&F1);
 
-    while(escolha != 5 ){
+    while(escolha != 6 ){
         printf("\n|| MENU ||\n");
         printf("|1| Enfileirar produtos:\n");
         printf("|2| Pesquisar um produto:\n");
         printf("|3| Imprimir produtos.\n");
         printf("|4| Solicitar atendimento.\n");
-        printf("|5| Sair.\n");
+        printf("|5| Gerar Binarios.");
+        printf("|6| Sair.\n");
         printf("Escolha uma das acoes:");
         scanf("%d", &escolha);
 
@@ -67,6 +68,9 @@ int main() {
                     EnfileirarPrioridade(&F2,item);
             break;
             case 5:
+                GerarBinarios(&F1,&x);
+                break;
+            case 6:
 
                 printf("\nEncerrando...aperta no enter para fechar a Tela");
             LiberarFila(&F1);
